@@ -5,7 +5,7 @@
 
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'motion/react';
 import { useEffect, useState } from 'react';
-import { Mail, Twitter, Linkedin } from 'lucide-react';
+import { Mail, Twitter, Linkedin, Smartphone, Layout, Atom, Server, Terminal, Cpu } from 'lucide-react';
 
 const principles = [
   {
@@ -23,6 +23,15 @@ const principles = [
     title: 'I\'m Precise',
     description: 'Every line of code and every pixel is placed with absolute intent and perfection.'
   }
+];
+
+const skills = [
+  { name: 'Flutter & Dart', rating: 95, icon: Smartphone },
+  { name: 'Web (HTML, CSS, JS)', rating: 95, icon: Layout },
+  { name: 'React', rating: 90, icon: Atom },
+  { name: 'Node.js & Express', rating: 85, icon: Server },
+  { name: 'Python', rating: 80, icon: Terminal },
+  { name: 'C++', rating: 50, icon: Cpu },
 ];
 
 const BG_COLOR = '#050505';
@@ -285,6 +294,40 @@ export default function App() {
                 </div>
               </motion.div>
             ))}
+          </div>
+        </section>
+
+        {/* Technical Expertise */}
+        <section className="mb-16 md:mb-40 pt-16 md:pt-24 border-t" style={{ borderColor: `${FG_COLOR}20` }}>
+          <div className="flex flex-col md:flex-row gap-12 md:gap-24">
+            <div className="md:w-1/3">
+              <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-display uppercase tracking-tight relative">
+                Tech<br/>Arsenal.
+              </h2>
+            </div>
+            <div className="md:w-2/3 flex flex-col gap-8 md:gap-12 pt-2 md:pt-4">
+              {skills.map((skill, index) => (
+                <div key={index} className="flex flex-col group" onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+                  <div className="flex justify-between items-center font-mono text-sm uppercase tracking-widest mb-4">
+                    <div className="flex items-center gap-3 transition-transform duration-300 group-hover:translate-x-2">
+                      <skill.icon className="w-4 h-4 opacity-70" />
+                      <span>{skill.name}</span>
+                    </div>
+                    <span className="opacity-60 font-mono transition-opacity duration-300 group-hover:opacity-100">{skill.rating}%</span>
+                  </div>
+                  <div className="w-full h-[1px] md:h-[2px] overflow-hidden" style={{ backgroundColor: `${FG_COLOR}20` }}>
+                    <motion.div 
+                      className="h-full"
+                      style={{ backgroundColor: FG_COLOR }}
+                      initial={{ width: 0 }}
+                      whileInView={{ width: `${skill.rating}%` }}
+                      viewport={{ once: true, margin: "-50px" }}
+                      transition={{ duration: 1.5, ease: [0.16, 1, 0.3, 1], delay: index * 0.15 }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </section>
 
