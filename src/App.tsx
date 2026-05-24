@@ -214,19 +214,18 @@ export default function App() {
                </h1>
              </div>
              <div className="col-span-1 md:col-span-4 lg:col-span-3 pb-2 md:pb-6 relative z-10">
-                <div className="text-xl md:text-2xl font-mono tracking-tighter flex pt-4 md:pt-0" style={{ opacity: 0.85 }}>
-                  {"Coding is fun".split('').map((char, index) => (
+                <div className="text-xl md:text-2xl font-mono tracking-tighter flex flex-wrap pt-4 md:pt-0" style={{ opacity: 0.85 }}>
+                  {"TESTED TRUSTED AND APPROVED".split('').map((char, index) => (
                     <motion.span
                       key={index}
-                      animate={{ y: [0, -10, 0] }}
+                      initial={{ opacity: 0, scale: 0.8, y: 20, filter: "blur(8px)" }}
+                      animate={{ opacity: 1, scale: 1, y: 0, filter: "blur(0px)" }}
                       transition={{
-                        duration: 1.5,
-                        repeat: Infinity,
-                        repeatDelay: 0.5,
-                        delay: index * 0.1,
-                        ease: "easeInOut"
+                        duration: 0.8,
+                        delay: index * 0.05 + 0.5,
+                        ease: [0.16, 1.3, 0.3, 1]
                       }}
-                      className={char === " " ? "w-2" : "inline-block"}
+                      className={char === " " ? "w-3 md:w-4" : "inline-block"}
                     >
                       {char}
                     </motion.span>
