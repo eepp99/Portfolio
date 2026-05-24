@@ -188,7 +188,7 @@ export default function App() {
 
       {/* Nav / Header */}
       <nav className="fixed top-0 left-0 right-0 p-6 md:p-8 flex justify-between items-start z-50 mix-blend-difference text-white pointer-events-none">
-        <div className="text-xs uppercase tracking-widest font-mono font-medium opacity-90">Mrz3e</div>
+        <div className="text-xs uppercase tracking-widest font-mono font-medium opacity-90">Ezenna Eronini M.</div>
         <div className="text-xs uppercase tracking-widest font-mono text-right flex flex-col gap-1 opacity-90">
           <span>Lagos, NG</span>
           <span className="opacity-60">{time} WAT</span>
@@ -215,7 +215,7 @@ export default function App() {
              </div>
              <div className="col-span-1 md:col-span-4 lg:col-span-3 pb-2 md:pb-6 relative z-10">
                 <div className="text-xl md:text-2xl font-mono tracking-tighter flex flex-wrap pt-4 md:pt-0" style={{ opacity: 0.85 }}>
-                  {"TESTED TRUSTED AND APPROVED.".split('').map((char, index) => (
+                  {"TESTED, TRUSTED, AND APPROVED.".split('').map((char, index) => (
                     <motion.span
                       key={index}
                       initial={{ opacity: 0, x: -5 }}
@@ -333,7 +333,7 @@ export default function App() {
               ))}
             </div>
             <p className="text-xs font-mono uppercase tracking-widest opacity-40">
-              © {new Date().getFullYear()} Mrz3e
+              © {new Date().getFullYear()} Ezenna Eronini M.
             </p>
           </div>
         </motion.footer>
