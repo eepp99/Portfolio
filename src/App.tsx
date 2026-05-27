@@ -5,7 +5,7 @@
 
 import { motion, useScroll, useTransform, useMotionValue, useSpring } from 'motion/react';
 import { useEffect, useState } from 'react';
-import { Mail, Twitter, Linkedin, Smartphone, Layout, Atom, Server, Terminal, Cpu } from 'lucide-react';
+import { Mail, Twitter, Linkedin, Smartphone, Layout, Atom, Server, Terminal, Cpu, Sun, Moon } from 'lucide-react';
 
 const principles = [
   {
@@ -34,9 +34,6 @@ const skills = [
   { name: 'C++', rating: 50, icon: Cpu },
 ];
 
-const BG_COLOR = '#050505';
-const FG_COLOR = '#F3F3F0';
-
 // Format time in Lagos
 const getLagosTime = () => {
   return new Intl.DateTimeFormat('en-GB', {
@@ -48,6 +45,10 @@ const getLagosTime = () => {
 };
 
 export default function App() {
+  const [isDarkMode, setIsDarkMode] = useState(true);
+  const BG_COLOR = isDarkMode ? '#050505' : '#F3F3F0';
+  const FG_COLOR = isDarkMode ? '#F3F3F0' : '#050505';
+
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
   const springConfig = { damping: 35, stiffness: 400, mass: 0.5 };
@@ -82,7 +83,7 @@ export default function App() {
   return (
     <div 
       style={{ backgroundColor: BG_COLOR, color: FG_COLOR }} 
-      className={`relative min-h-screen font-sans selection:bg-[#F3F3F0] selection:text-[#050505] overflow-hidden ${isDesktop ? 'cursor-none' : ''}`}
+      className={`relative min-h-screen font-sans overflow-hidden transition-colors duration-700 ${isDarkMode ? 'selection:bg-[#F3F3F0] selection:text-[#050505]' : 'selection:bg-[#050505] selection:text-[#F3F3F0]'} ${isDesktop ? 'cursor-none' : ''}`}
     >
       
       {/* Live Ambient Loop Background */}
@@ -197,8 +198,25 @@ export default function App() {
 
       {/* Nav / Header */}
       <nav className="fixed top-0 left-0 right-0 p-6 md:p-8 flex justify-between items-start z-50 mix-blend-difference text-white pointer-events-none">
-        <div className="text-xs uppercase tracking-widest font-mono font-medium opacity-90">Ezenna Eronini M.</div>
-        <div className="text-xs uppercase tracking-widest font-mono text-right flex flex-col gap-1 opacity-90">
+        <div className="text-xs uppercase tracking-widest font-mono font-medium opacity-90 w-1/3">Ezenna Eronini M.</div>
+        <div 
+          className="pointer-events-auto cursor-pointer w-1/3 flex justify-center items-center"
+          onClick={() => setIsDarkMode(!isDarkMode)}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+        >
+          <div className="w-12 h-6 rounded-full border border-current opacity-50 flex items-center px-1 relative transition-colors">
+            <motion.div 
+              className="w-4 h-4 rounded-full flex items-center justify-center absolute"
+              style={{ backgroundColor: FG_COLOR, color: BG_COLOR }}
+              animate={{ left: isDarkMode ? "4px" : "28px" }}
+              transition={{ type: "spring", stiffness: 300, damping: 20 }}
+            >
+              {isDarkMode ? <Moon size={10} strokeWidth={3} /> : <Sun size={10} strokeWidth={3} />}
+            </motion.div>
+          </div>
+        </div>
+        <div className="text-xs uppercase tracking-widest font-mono text-right flex flex-col gap-1 opacity-90 w-1/3">
           <span>Lagos, NG</span>
           <span className="opacity-60">{time} WAT</span>
         </div>
@@ -218,13 +236,20 @@ export default function App() {
              <div className="col-span-1 md:col-span-8 lg:col-span-9">
                <h1 className="text-[15vw] md:text-[10vw] lg:text-[11vw] font-medium tracking-tighter font-display uppercase leading-[0.85] indent-[-0.03em] m-0 p-0 break-words">
                  Software <br/> 
-                 <span className="text-transparent relative inline-block transition-colors duration-500 hover:text-[#050505]" style={{ WebkitTextStroke: `1px ${FG_COLOR}`}}>Architect</span> <br/>
+                 <span 
+                   className="text-transparent relative inline-block transition-colors duration-500" 
+                   style={{ WebkitTextStroke: `1px ${FG_COLOR}`}}
+                   onMouseEnter={(e) => { e.currentTarget.style.color = BG_COLOR; }}
+                   onMouseLeave={(e) => { e.currentTarget.style.color = 'transparent'; }}
+                 >
+                   Architect
+                 </span> <br/>
                  & Designer.
                </h1>
              </div>
              <div className="col-span-1 md:col-span-4 lg:col-span-3 pb-2 md:pb-6 relative z-10">
                 <div className="text-xl md:text-2xl font-mono tracking-tighter flex flex-wrap pt-4 md:pt-0" style={{ opacity: 0.85 }}>
-                  {"TESTED, TRUSTED, AND APPROVED.".split('').map((char, index) => (
+                  {'"Redefining software architecture, one line of code at a time."'.split('').map((char, index) => (
                     <motion.span
                       key={index}
                       initial={{ opacity: 0, x: -5 }}
@@ -345,15 +370,20 @@ export default function App() {
             onMouseLeave={() => setIsHovered(false)}
           >
               <a href="https://wa.me/2348144559203" target="_blank" rel="noopener noreferrer" className="group inline-block w-full">
-               <h3 className="text-[17vw] md:text-[18vw] font-display uppercase font-medium tracking-tighter leading-none transition-colors duration-700 w-full text-transparent" style={{ WebkitTextStroke: `1px ${FG_COLOR}`}}>
-                  <span className="group-hover:text-[#050505] transition-colors duration-700">Let's </span> 
-                  <span className="group-hover:text-[#050505] transition-colors duration-700 delay-75">Talk</span>
+               <h3 
+                 className="text-[17vw] md:text-[18vw] font-display uppercase font-medium tracking-tighter leading-none transition-colors duration-700 w-full text-transparent" 
+                 style={{ WebkitTextStroke: `1px ${FG_COLOR}`}}
+                 onMouseEnter={(e) => { const spans = e.currentTarget.querySelectorAll('span'); spans.forEach(s => s.style.color = BG_COLOR); }}
+                 onMouseLeave={(e) => { const spans = e.currentTarget.querySelectorAll('span'); spans.forEach(s => s.style.color = 'transparent'); }}
+               >
+                  <span className="transition-colors duration-700">Let's </span> 
+                  <span className="transition-colors duration-700 delay-75">Talk</span>
                </h3>
              </a>
           </div>
           
           <div className="w-full flex flex-col md:flex-row justify-between items-center gap-6 md:gap-8 border-t pt-6 md:pt-8" style={{ borderColor: `${FG_COLOR}20` }}>
-            <div className="flex gap-8 text-xs font-mono uppercase tracking-widest text-[#F3F3F0]">
+            <div className="flex gap-8 text-xs font-mono uppercase tracking-widest" style={{ color: FG_COLOR }}>
               {[
                 { name: 'Email', icon: Mail, url: 'mailto:ezennaeronini@gmail.com' }, 
                 { name: 'Twitter', icon: Twitter, url: '#' }, 
