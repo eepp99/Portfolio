@@ -249,7 +249,7 @@ export default function App() {
              </div>
              <div className="col-span-1 md:col-span-4 lg:col-span-3 pb-2 md:pb-6 relative z-10">
                 <div className="text-xl md:text-2xl font-mono tracking-tighter flex flex-wrap pt-4 md:pt-0" style={{ opacity: 0.85 }}>
-                  {'"Redefining software architecture, one line of code at a time."'.split('').map((char, index) => (
+                  {"I build full stack web and mobile applications handling both front end and backend development with modern technologies.".split('').map((char, index) => (
                     <motion.span
                       key={index}
                       initial={{ opacity: 0, x: -5 }}
